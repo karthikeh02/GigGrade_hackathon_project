@@ -1,0 +1,57 @@
+# Environment variables - NEVER COMMIT THESE!
+.env
+.env.local
+.streamlit/secrets.toml
+
+# Python virtual environments
+gitgrade_env/
+venv/
+env/
+ENV/
+.venv/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Streamlit cache
+.streamlit/secrets.toml
+
+# Temporary files
+temp_repo/
+*.tmp
+*.log
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+*.egg
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# PyTest
+.pytest_cache/
+.coverage
+htmlcov/
+
+# MyPy
+.mypy_cache/
+
+# Environment variables
+.env
+.env.local
