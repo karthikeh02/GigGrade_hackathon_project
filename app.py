@@ -339,7 +339,6 @@
 
 
 
-
 import streamlit as st
 from github import Github, Auth
 import git
@@ -388,7 +387,7 @@ def generate_ai_summary(metrics_str):
     if AI_AVAILABLE and generator:
         try:
             prompt = f"Repository analysis: {metrics_str[:512]}. Provide brief summary of strengths/weaknesses, then improvement roadmap."
-            ai_response = generator(prompt, max_length=300, num_return_sequences=1, pad_token_id=50256)[0]['generated_text']
+            ai_response = generator(prompt, max_length=300, num_return_sequences=1, pad_token_id=50256, truncation=True)[0]['generated_text']
             summary_match = re.split(r'Roadmap:|improvement|steps', ai_response, flags=re.IGNORECASE, maxsplit=1)
             summary = summary_match[0].replace(prompt, "").strip()[:300]
             roadmap_raw = summary_match[1] if len(summary_match) > 1 else ""
@@ -441,15 +440,15 @@ def generate_rule_based_summary(metrics_str):
     summary = ". ".join(summary_parts) if summary_parts else "Repository shows average quality indicators across metrics."
     
     roadmap_items = []
-    if scores['tests'] < 60:
+    if scores.get('tests', 0) < 60:
         roadmap_items.append("• Add comprehensive unit tests (target 80%+ coverage)")
-    if scores['documentation'] < 60:
+    if scores.get('documentation', 0) < 60:
         roadmap_items.append("• Enhance README with clear installation and usage instructions")
-    if scores['code_quality'] < 60:
+    if scores.get('code_quality', 0) < 60:
         roadmap_items.append("• Refactor complex code sections for better maintainability")
-    if scores['version_control'] < 50:
+    if scores.get('collaboration', 0) < 50:
         roadmap_items.append("• Adopt feature branch workflow with pull requests")
-    if scores['structure'] < 60:
+    if scores.get('structure', 0) < 60:
         roadmap_items.append("• Reorganize into standard project layout (src/, tests/, docs/)")
     
     if not roadmap_items:
