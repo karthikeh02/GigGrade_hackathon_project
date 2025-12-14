@@ -2,6 +2,6 @@ streamlit==1.31.0
 PyGithub==2.1.1
 gitpython==3.1.40
 radon==6.0.1
-transformers==4.36.0
-torch==2.1.0
 python-dotenv==1.0.0
+transformers==4.36.0
+torch==2.5.1
